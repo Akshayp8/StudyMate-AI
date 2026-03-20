@@ -35,29 +35,73 @@ export default function Profile() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 md:p-12">
-      <header className="flex justify-between items-center mb-10 bg-gray-900 p-6 rounded-2xl shadow-lg border border-gray-800">
-        <div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">User DNA Profile</h1>
-          <p className="text-gray-400 text-sm mt-1">Holistic view of all your learning vectors mapped by Hindsight Cloud</p>
+    <div className="min-h-screen bg-gray-900 text-white p-6 md:p-10">
+      <header className="relative w-full flex justify-center items-center mb-10 bg-gray-900/50 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-gray-800">
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 inline-block">User DNA Profile</h1>
+          <p className="text-gray-400 text-sm mt-1 font-medium italic">Your personalized learning identity across the StudyMate ecosystem</p>
         </div>
-        <Link href="/" className="px-5 py-2.5 rounded-xl font-bold transition-all bg-gray-800 hover:bg-gray-700 text-gray-300">⬅ Back to Dashboard</Link>
+        <Link href="/" className="absolute left-6 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold transition-all border border-gray-700 shadow-lg">
+          ⬅ Back
+        </Link>
       </header>
-      
-      <main className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-xl min-h-[500px] flex flex-col">
-          <h2 className="text-2xl font-bold mb-6 text-gray-200">Skill Radar Map</h2>
-          <div className="flex-grow min-h-[300px]">
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        {/* User Info Card */}
+        <div className="bg-gray-900 p-8 rounded-3xl shadow-2xl border border-gray-800 flex flex-col items-center text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-4">
+            <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">ACTIVE</span>
+          </div>
+          <div className="w-24 h-24 bg-gradient-to-tr from-blue-500 to-emerald-500 rounded-full mb-4 flex items-center justify-center text-3xl font-bold shadow-lg shadow-blue-500/20">
+            A
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-1">Akshay P.</h2>
+          <p className="text-gray-400 text-sm mb-6">Mastery Level: 14</p>
+          
+          <div className="w-full space-y-4 text-left">
+            <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+              <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-1">Guest Token ID</p>
+              <p className="text-blue-400 font-mono text-sm truncate">SM-GUEST-446-X8B2-99L</p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-800/50 p-3 rounded-xl border border-gray-700 text-center">
+                <p className="text-gray-500 text-[10px] uppercase font-bold">Quizzes Take</p>
+                <p className="text-emerald-400 font-bold text-lg">{history.length}</p>
+              </div>
+              <div className="bg-gray-800/50 p-3 rounded-xl border border-gray-700 text-center">
+                <p className="text-gray-500 text-[10px] uppercase font-bold">Avg. Accuracy</p>
+                <p className="text-blue-400 font-bold text-lg">78%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Skill Radar Chart */}
+        <div className="lg:col-span-2 bg-gray-900 p-8 rounded-3xl shadow-2xl border border-gray-800">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <span className="text-emerald-400">⚡</span> Concept Proficiency
+            </h3>
+            <span className="text-gray-500 text-xs">Updated Real-time</span>
+          </div>
+          <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="70%" data={dnaData}>
+              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={dnaData}>
                 <PolarGrid stroke="#374151" />
-                <PolarAngleAxis dataKey="topic" tick={{ fill: '#9CA3AF', fontSize: 13 }} />
+                <PolarAngleAxis dataKey="topic" tick={{ fill: '#9CA3AF', fontSize: 12 }} />
                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                <Radar name="Proficiency" dataKey="proficiency" stroke="#60A5FA" fill="#3B82F6" fillOpacity={0.4} />
+                <Radar
+                   name="User Progress"
+                   dataKey="proficiency"
+                   stroke="#3B82F6"
+                   fill="#3B82F6"
+                   fillOpacity={0.4}
+                />
               </RadarChart>
             </ResponsiveContainer>
           </div>
         </div>
+      </div>
         
         <div className="space-y-8">
           <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-xl">
